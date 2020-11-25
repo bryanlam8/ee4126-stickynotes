@@ -75,7 +75,7 @@ $(document).ready(function(){
   });
 
   $('#listed').click(function(e){
-    var id = e.target.parentElement.id;
+    var id = memo;
     var color = e.target.parentElement.style.backgroundColor;
     activeNote = id;
     $('#edit-mode').removeClass('no-display').addClass('display');
@@ -121,9 +121,10 @@ $(document).ready(function(){
     .then(async (res) =>{
       let memo = await res.json();
       console.log(memo);
+      $('#listed').empty();
       let len = memo.length;
       memo.forEach(note =>{
-        $('#listed').append('<div id="note' + note.id + '</div> <div class="list-text">' + note.content + '</div> </div>');
+        $('#listed').append('<div id="note' + note.id + '"</div> <div class="list-text">' + note.content + '</div> </div>');
       })
       
     })
