@@ -1,8 +1,5 @@
 $(document).ready(function(){
-
-  var noteCount = 0;
   var activeNote = null;
-
   $('.color-box').click(function(){
     var color = $(this).css('background-color');
     $('notepad').css('background-color', color);
@@ -19,7 +16,7 @@ $(document).ready(function(){
     }
     var created = new Date();
     var color = $('notepad').css('background-color');
-    var id = noteCount + 1;
+    var id;
     if (activeNote) {
       $('#' + activeNote)[0].children[0].innerHTML = title;
       $('#' + activeNote)[0].children[1].innerHTML = created.toLocaleString("en-US");
@@ -28,9 +25,34 @@ $(document).ready(function(){
       activeNote = null;
       $('#edit-mode').removeClass('display').addClass('no-display');
     } else {
-      var created = new Date();
-      $('#listed').append('<div id="note' + id + '" style="background-color: ' + color + '"><div class="list-title">' + title + '</div> <div class="list-date">' + created.toLocaleString("en-US") + '</div> <div class="list-text">' + body + '</div> </div>');
-      noteCount++;
+      // var creationDate = new Date();
+      var tran = JSON.stringify({"username": localStorage.getItem('username'),"password": localStorage.getItem('password')})
+      fetch('http://54.226.195.55:8080/api/GetMyTokenpw', {
+            method: 'POST',
+            body: tran,
+            headers: {}
+      })
+      .then(async (res) =>{
+        let pw = await res.text();
+        console.log(pw);
+        sessionStorage.setItem('pw', pw);
+      })
+      tran = JSON.stringify({"token": localStorage.getItem('token'),"content": body, "color": "White", "font_size": "12"})
+      fetch('http://54.226.195.55:8080/api/postMemo', {
+            method: 'POST',
+            body: tran,
+            headers: {}
+      })
+      .then(async (res) =>{
+        let msg = await res.text();
+        if(msg === "cool"){
+          alert("new note added");
+        }
+        else{
+          alert("fail")
+        }
+      })
+      $('#listed').append('<div id="note' + id + '" style="background-color: ' + color + '">' + '</div> <div class="list-text">' + body + '</div> </div>');
     };
     $('#title-field').val('');
     $('#body-field').val('');
@@ -79,13 +101,31 @@ $(document).ready(function(){
   }
 
   $('#btn-refresh').click(function(){
-    var tran = JSON.stringify({"token": username,"tokenpw": parsePassword})
-    fetch('http://54.172.67.50:8080/api/memo', {
+    var tran = JSON.stringify({"username": localStorage.getItem('username'),"password": localStorage.getItem('password')})
+    fetch('http://54.226.195.55:8080/api/GetMyTokenpw', {
           method: 'POST',
           body: tran,
           headers: {}
     })
     .then(async (res) =>{
+      let pw = await res.text();
+      console.log(pw);
+      sessionStorage.setItem('pw', pw);
+    })
+    var tran = JSON.stringify({"token": localStorage.getItem('token'),"tokenpw": sessionStorage.getItem('pw')})
+    fetch('http://54.226.195.55:8080/api/memo', {
+          method: 'POST',
+          body: tran,
+          headers: {}
+    })
+    .then(async (res) =>{
+      let memo = await res.json();
+      console.log(memo);
+      let len = memo.length;
+      memo.forEach(note =>{
+        $('#listed').append('<div id="note' + note.id + '</div> <div class="list-text">' + note.content + '</div> </div>');
+      })
+      
     })
 
   });

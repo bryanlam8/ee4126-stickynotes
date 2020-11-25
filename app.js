@@ -94,7 +94,7 @@ function() {
       let msg = "{\"username\":\"" + username + "\",\"password\":\"" + parsePassword + "\"}";
       console.log(tran)
       console.log(msg)
-      fetch('http://54.172.67.50:8080/api/NewUser', {
+      fetch('http://54.226.195.55:8080/api/NewUser', {
           method: 'POST',
           body: tran,
           headers: {}
@@ -105,7 +105,7 @@ function() {
 
         // Get the token from server: token is the identifier
         if(str === "done"){
-          fetch('http://54.172.67.50:8080/api/GetMyToken', {
+          fetch('http://54.226.195.55:8080/api/GetMyToken', {
             method: 'POST',
             body: msg,
             headers: {}
@@ -127,7 +127,7 @@ function() {
           })
         }
         else if(str === "Fail, username already exist or internal error"){
-          fetch('http://54.172.67.50:8080/api/GetMyToken', {
+          fetch('http://54.226.195.55:8080/api/GetMyToken', {
             method: 'POST',
             body: tran,
             headers: {}
