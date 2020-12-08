@@ -40,10 +40,20 @@ function addNotes(color, title, body, created, refresh){
   } 
   else {
     var id = noteCount;
-    var created = new Date();
+    if(refresh){
+      var dateStr = JSON.parse('"' + created + '"');  
+      console.log(dateStr); // 2014-01-01T23:28:56.782Z
+              
+      var date = new Date(dateStr);
+      console.log(date);  // Wed Jan 01 2014 13:28:56 GMT-1000 (Hawaiian Standard Time)
+    }
+    else{
+      var date = new Date();
+    }
+    console.log(date);
     let text = `<div id="${id}" style="background-color: ${color}">
                   <div class="list-title">${title}</div> 
-                  <div class="list-date">${created.toLocaleString("en-US")}</div> 
+                  <div class="list-date">${date.toLocaleString("en-US")}</div> 
                   <div class="list-text" style="white-space: pre-wrap">${body}</div> 
                 </div>`;
     const position = "beforeend";
@@ -55,7 +65,7 @@ function addNotes(color, title, body, created, refresh){
             color: color,
             title: title,
             body: body,
-            created: created
+            created: date
         }
       );
     }
