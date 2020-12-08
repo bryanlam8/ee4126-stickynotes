@@ -127,15 +127,15 @@ notePad {
   display: none;
 }
 
-/* button {
+button {
   margin: 5px;
-  border: solid 3px grey;
+  border: solid 3px white;
   border-radius: 10%;
-  font-size: 22px;
+  font-size: 15px;
   font-weight: 800;
   text-transform: uppercase;
-  color: #DEDEDE;
-} */
+  color: white;
+}
 
 button:hover, .color-box:hover {
   cursor: pointer;
@@ -151,6 +151,10 @@ button:hover, .color-box:hover {
 
 #btn-delete {
   background-color: #E41A36;
+}
+
+#btn-logout{
+  background-color: black;
 }
 
 .white {
@@ -195,57 +199,4 @@ button:hover, .color-box:hover {
 
 .pink {
   background-color: #FF89FD;
-}
-
-label, input { 
-  display:block; 
-}
-
-input.text { 
-  margin-bottom:12px; 
-  width:95%; 
-  padding: .4em; 
-}
-
-fieldset { 
-  padding:0; 
-  border:0; 
-  margin-top:25px; 
-}
-
-h1 { 
-  font-size: 1.2em; 
-  margin: .6em 0; 
-}
-
-div#users-contain { 
-  width: 350px; 
-  margin: 20px 0; 
-}
-
-div#users-contain table {
-   margin: 1em 0; 
-   border-collapse: collapse; 
-   width: 100%;
-}
-
-div#users-contain table td, div#users-contain table th {
-   border: 1px solid #eee; 
-   padding: .6em 10px; 
-   text-align: left; 
-}
-
-.ui-dialog .ui-state-error { 
-  padding: .3em;
-}
-
-.validateTips { 
-  border: 1px solid transparent; 
-  padding: 0.3em; 
-}
-
-.ui-widget-overlay.modal-opened {
-  background: #000;
-  opacity: .50;
-  filter: Alpha(Opacity=50);
 }
