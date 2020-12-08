@@ -42,10 +42,10 @@ function addNotes(color, title, body, created, refresh){
     var id = noteCount;
     if(refresh){
       var dateStr = JSON.parse('"' + created + '"');  
-      console.log(dateStr); // 2014-01-01T23:28:56.782Z
+      console.log(dateStr);
               
       var date = new Date(dateStr);
-      console.log(date);  // Wed Jan 01 2014 13:28:56 GMT-1000 (Hawaiian Standard Time)
+      console.log(date);
     }
     else{
       var date = new Date();
